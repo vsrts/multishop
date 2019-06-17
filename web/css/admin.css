@@ -1,0 +1,6 @@
+/* slides */
+.slide-row{
+    display: flex;
+    justify-content: space-between;
+}
+/* end slides */
