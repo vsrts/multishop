@@ -1,0 +1,26 @@
+План и реализация проекта
+
+*Категории и товары
+
++Список категорий
+id, name, text
+
+Список товаров
+id, sku, name, category_id, text, price, discount, status
+
+Изображения товара и возможно категории
+релизуем с помощью модуля
+
+Список атрибутов
+id, name
+
+Значения атрибутов в товаре
+product_id
+attribute_id
+value
+
+Как и атрибуты - мета теги категорий
+category_id, title, key, desc
+
+Мета теги товаров
+category_id, title, key, desc
