@@ -17,10 +17,10 @@ class m190618_095722_create_products_table extends Migration
             'sku' => $this->integer()->notNull()->unique(),
             'name' => $this->string(),
             'category_id' => $this->integer(),
-            'description' => $this->text(),
-            'price' => $this->float(),
-            'discount' => $this->string(),
-            'status' => $this->integer(),
+            'text' => $this->text(),
+            'meta_title' => $this->string(),
+            'meta_key' => $this->string(),
+            'meta_desc' => $this->string(),
         ]);
 
         $this->createIndex('idx-products_category_id', '{{%products}}', 'category_id');

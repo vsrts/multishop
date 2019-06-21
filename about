@@ -3,24 +3,34 @@
 *Категории и товары
 
 +Список категорий
-id, name, text
+id, name, text, title, key, desc
 
-Список товаров
-id, sku, name, category_id, text, price, discount, status
++Список товаров
+id, sku, name, category_id, text, title, key, desc
+
++Инфо товаров по городам
+price, discount, status
+
++Список атрибутов
+id, name
+
++Значения атрибутов в товаре
+product_id
+attribute_id
 
 Изображения товара и возможно категории
 релизуем с помощью модуля
 
-Список атрибутов
-id, name
+*По городам
 
-Значения атрибутов в товаре
-product_id
-attribute_id
-value
+Вообще то поддомены не создаются, а перенаправляются, т.е. адрес вида http://game.site.ru/World обрабатывается htaccess-ом и превращается в http://site.ru/game.php?the=World и передаётся скрипту, но урл при этом не затрагивается.
 
-Как и атрибуты - мета теги категорий
-category_id, title, key, desc
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^(.+)\.site/? [NC]
+RewriteRule (.*) http://site/$1.php?the=$2/ [L]
 
-Мета теги товаров
-category_id, title, key, desc
+p.s.: в DNS поддомены *.site должны указывать на айпи сервера, и в настройках виртуального хоста в апаче должно быть:
+ServerAlias *.site
+
+https://php.ru/forum/threads/virtualnyj-subdomeny-s-pomoschju-htaccess-poplyli-otnosit.43740/
+https://toster.ru/q/73928
