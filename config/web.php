@@ -8,7 +8,6 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'language' => 'ru',
-    'defaultRoute' => 'admin',
     'name' => 'Суши Даром',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',

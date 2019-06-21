@@ -50,7 +50,12 @@ $this->registerLinkTag([
             ['label' => 'Точки', 'url' => ['/admin/points']],
             ['label' => 'Слайды', 'url' => ['/admin/slides']],
             ['label' => 'Пользователи', 'url' => ['/admin/user']],
-            ['label' => 'Категории', 'url' => ['/admin/categories']],
+            ['label' => 'Каталог', 'items' => [
+                ['label' => 'Категории', 'url' => ['/admin/categories']],
+                ['label' => 'Товары', 'url' => ['/admin/products']],
+                ['label' => 'Аттрибуты', 'url' => ['/admin/attribute']],
+            ],
+            ],
             Yii::$app->user->isGuest ? (
             ['label' => 'Login', 'url' => ['/admin']]
             ) : (
