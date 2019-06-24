@@ -49,6 +49,7 @@ $this->registerLinkTag([
             ['label' => 'Города', 'url' => ['/admin/cities']],
             ['label' => 'Точки', 'url' => ['/admin/points']],
             ['label' => 'Слайды', 'url' => ['/admin/slides']],
+            ['label' => 'Акции', 'url' => ['/admin/stock']],
             ['label' => 'Пользователи', 'url' => ['/admin/user']],
             ['label' => 'Каталог', 'items' => [
                 ['label' => 'Категории', 'url' => ['/admin/categories']],
