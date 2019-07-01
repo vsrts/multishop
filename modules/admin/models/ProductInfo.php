@@ -39,20 +39,7 @@ class ProductInfo extends \yii\db\ActiveRecord
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Products::className(), 'targetAttribute' => ['product_id' => 'id']],
         ];
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'product_id' => 'Product ID',
-            'price' => 'Price',
-            'discount' => 'Discount',
-            'status' => 'Status',
-        ];
-    }
+    
 
     /**
      * @return \yii\db\ActiveQuery

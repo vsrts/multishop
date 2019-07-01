@@ -23,11 +23,28 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'sku',
             'name',
             'category_id',
             'text:ntext',
+            [
+                'attribute' => 'price',
+                'value' => function($data){
+                    return $data->productinfo->price;
+                }
+            ],
+            [
+                'attribute' => 'discount',
+                'value' => function($data){
+                    return $data->productinfo->discount;
+                }
+            ],
+            [
+                'attribute' => 'status',
+                'value' => function($data){
+                    return $data->productinfo->status;
+                }
+            ],
             //'meta_title',
             //'meta_key',
             //'meta_desc',

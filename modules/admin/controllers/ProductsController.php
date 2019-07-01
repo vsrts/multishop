@@ -4,6 +4,7 @@ namespace app\modules\admin\controllers;
 
 use Yii;
 use app\modules\admin\models\Products;
+use app\modules\admin\models\ProductInfo;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -65,6 +66,7 @@ class ProductsController extends Controller
     public function actionCreate()
     {
         $model = new Products();
+        $productInfo = new ProductInfo();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

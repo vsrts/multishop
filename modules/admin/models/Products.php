@@ -53,30 +53,14 @@ class Products extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'sku' => 'Sku',
-            'name' => 'Name',
-            'category_id' => 'Category ID',
-            'text' => 'Text',
-            'meta_title' => 'Meta Title',
-            'meta_key' => 'Meta Key',
-            'meta_desc' => 'Meta Desc',
+            'sku' => 'Артикул',
+            'name' => 'Наименование',
+            'category_id' => 'Категория',
+            'text' => 'Описание',
+            'price' => 'Цена',
+            'discount' => 'Скидка',
+            'status' => 'Статус',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getAttributeValues()
-    {
-        return $this->hasMany(AttributeValue::className(), ['product_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getProductAttributes()
-    {
-        return $this->hasMany(Attribute::className(), ['id' => 'attribute_id'])->viaTable('attribute_value', ['product_id' => 'id']);
     }
 
     /**
