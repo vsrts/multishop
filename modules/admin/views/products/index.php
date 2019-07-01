@@ -27,6 +27,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'category_id',
             'text:ntext',
+            'weight',
+            'kkal',
+            'count',
+            'volume',
             [
                 'attribute' => 'price',
                 'value' => function($data){
@@ -45,9 +49,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->productinfo->status;
                 }
             ],
-            //'meta_title',
-            //'meta_key',
-            //'meta_desc',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

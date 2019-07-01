@@ -16,8 +16,6 @@ use Yii;
  * @property string $meta_key
  * @property string $meta_desc
  *
- * @property AttributeValue[] $attributeValues
- * @property Attribute[] $attributes0
  * @property ProductInfo[] $productInfos
  * @property Categories $category
  */
@@ -38,9 +36,9 @@ class Products extends \yii\db\ActiveRecord
     {
         return [
             [['sku'], 'required'],
-            [['sku', 'category_id'], 'integer'],
+            [['sku', 'category_id', 'weight', 'kkal', 'count', 'volume'], 'integer'],
             [['text'], 'string'],
-            [['name', 'meta_title', 'meta_key', 'meta_desc'], 'string', 'max' => 255],
+            [['name'], 'string', 'max' => 255],
             [['sku'], 'unique'],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
@@ -57,6 +55,10 @@ class Products extends \yii\db\ActiveRecord
             'name' => 'Наименование',
             'category_id' => 'Категория',
             'text' => 'Описание',
+            'weight' => 'Вес',
+            'kkal' => 'Калории',
+            'count' => 'Количество в порции',
+            'volume' => 'Объём',
             'price' => 'Цена',
             'discount' => 'Скидка',
             'status' => 'Статус',

@@ -68,12 +68,35 @@ class ProductsController extends Controller
         $model = new Products();
         $productInfo = new ProductInfo();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $productInfo->load(Yii::$app->request->post())) {
+
+            $model->attributes = $model->load(Yii::$app->request->post());
+            $productInfo->attributes = $productInfo->load(Yii::$app->request->post());
+
+            $isValid = $model->validate();
+            $transaction=Yii::$app->db->beginTransaction();
+            try {
+                if ($isValid) {
+                    $model->save(false);
+                }
+
+                $productInfo->product_id = $model->id;
+                $isValid = $productInfo->validate() && $isValid;
+
+                if ($isValid) {
+                    $productInfo->save(false);
+                    $transaction->commit();
+                    return $this->redirect(['index', 'id' => $model->id]);
+                }
+            }catch(Exception $e){
+                $transaction->rollBack();
+                throw $e;
+            }
         }
 
         return $this->render('create', [
             'model' => $model,
+            'productInfo' => $productInfo,
         ]);
     }
 

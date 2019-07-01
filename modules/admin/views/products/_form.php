@@ -12,20 +12,19 @@ use app\modules\admin\models\Categories;
 <div class="products-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
     <?= $form->field($model, 'sku')->textInput() ?>
-
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'category_id')->dropDownList(Categories::find()->select(['name', 'id'])->indexBy('id')->column(), ['prompt' => 'Выберите категорию']) ?>
-
     <?= $form->field($model, 'text')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'weight')->textInput() ?>
+    <?= $form->field($model, 'kkal')->textInput() ?>
+    <?= $form->field($model, 'count')->textInput() ?>
+    <?= $form->field($model, 'volume')->textInput() ?>
+    <?= $form->field($productInfo, 'price')->textInput() ?>
+    <?= $form->field($productInfo, 'discount')->textInput() ?>
+    <?= $form->field($productInfo, 'status')->textInput() ?>
 
-    <?= $form->field($model, 'meta_title')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'meta_key')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'meta_desc')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
