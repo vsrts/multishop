@@ -110,13 +110,25 @@ class ProductsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $productInfo = ProductInfo::findOne(['product_id' => $id]);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if(!isset($model, $productInfo)){
+            throw new NotFoundHttpException('Товар не найден');
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $productInfo->load(Yii::$app->request->post())) {
+            $isValid = $model->validate();
+            $isValid = $productInfo->validate() && $isValid;
+            if($isValid){
+                $model->save();
+                $productInfo->save();
+                return $this->redirect('index');
+            }
         }
 
         return $this->render('update', [
             'model' => $model,
+            'productInfo' => $productInfo,
         ]);
     }
 

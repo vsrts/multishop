@@ -16,7 +16,7 @@ use Yii;
  * @property string $meta_key
  * @property string $meta_desc
  *
- * @property ProductInfo[] $productInfos
+ * @property ProductInfo[] $productInfo
  * @property Categories $category
  */
 class Products extends \yii\db\ActiveRecord
@@ -68,9 +68,9 @@ class Products extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getProductInfos()
+    public function getProductInfo()
     {
-        return $this->hasMany(ProductInfo::className(), ['product_id' => 'id']);
+        return $this->hasOne(ProductInfo::className(), ['product_id' => 'id']);
     }
 
     /**

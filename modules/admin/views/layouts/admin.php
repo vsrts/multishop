@@ -46,8 +46,10 @@ $this->registerLinkTag([
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Города', 'url' => ['/admin/cities']],
-            ['label' => 'Точки', 'url' => ['/admin/points']],
+            ['label' => 'Локация', 'items' => [
+                ['label' => 'Города', 'url' => ['/admin/cities']],
+                ['label' => 'Точки', 'url' => ['/admin/points']],
+            ]],
             ['label' => 'Слайды', 'url' => ['/admin/slides']],
             ['label' => 'Акции', 'url' => ['/admin/stock']],
             ['label' => 'Пользователи', 'url' => ['/admin/user']],

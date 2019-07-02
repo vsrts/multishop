@@ -35,6 +35,7 @@ class ProductInfo extends \yii\db\ActiveRecord
         return [
             [['product_id', 'status'], 'integer'],
             [['price'], 'number'],
+            [['price'], 'required'],
             [['discount'], 'string', 'max' => 255],
             [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Products::className(), 'targetAttribute' => ['product_id' => 'id']],
         ];
