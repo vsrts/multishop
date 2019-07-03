@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use app\modules\admin\models\Categories;
+use app\modules\admin\models\Option;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Products */
@@ -23,6 +24,7 @@ use app\modules\admin\models\Categories;
     <?= $form->field($productInfo, 'price')->textInput() ?>
     <?= $form->field($productInfo, 'discount')->textInput() ?>
     <?= $form->field($productInfo, 'status')->textInput() ?>
+    <?= $form->field($model, 'optionsArray')->dropDownList(Option::find()->select(['name', 'id'])->indexBy('id')->column(), [ 'multiple' => 'multiple']) ?>
 
 
 

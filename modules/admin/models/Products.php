@@ -38,6 +38,7 @@ class Products extends \yii\db\ActiveRecord
             [['sku'], 'required'],
             [['sku', 'category_id', 'weight', 'kkal', 'count', 'volume'], 'integer'],
             [['text'], 'string'],
+            [['optionsArray'], 'safe'],
             [['name'], 'string', 'max' => 255],
             [['sku'], 'unique'],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
@@ -62,6 +63,7 @@ class Products extends \yii\db\ActiveRecord
             'price' => 'Цена',
             'discount' => 'Скидка',
             'status' => 'Статус',
+            'optionsArray' => 'Опции'
         ];
     }
 
@@ -79,5 +81,44 @@ class Products extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Categories::className(), ['id' => 'category_id']);
+    }
+
+    public function getOptions(){
+        return $this->hasMany(Option::className(), ['id' => 'option_id'])->viaTable('product_option', ['product_id' => 'id']);
+    }
+
+    private $_optionsArray;
+
+    public function getOptionsArray(){
+        if($this->_optionsArray === null){
+            $this->_optionsArray = $this->getOptions()->select('id')->column();
+        }
+        return $this->_optionsArray;
+    }
+
+    public function setOptionsArray($value){
+        return $this->_optionsArray = (array)$value;
+    }
+
+    public function afterSave($insert, $changedAttributes){
+        $this->updateOptions();
+        parent::afterSave($insert, $changedAttributes);
+    }
+
+    private function updateOptions(){
+        $currentOptionsIds = $this->getOptions()->select('id')->column();
+        $newOptionsIds = $this->getOptionsArray();
+
+        foreach(array_filter(array_diff($newOptionsIds, $currentOptionsIds)) as $optionsId){
+            if($options = Option::findOne($optionsId)){
+                $this->link('options', $options);
+            }
+        }
+
+        foreach(array_filter(array_diff($currentOptionsIds, $newOptionsIds)) as $optionsId){
+            if($options = Option::findOne($optionsId)){
+                $this->unlink('options', $options, true);
+            }
+        }
     }
 }
