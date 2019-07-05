@@ -10,6 +10,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\models\Categories;
+use yii\widgets\Menu;
 
 AppAsset::register($this);
 
@@ -69,14 +70,18 @@ $this->registerLinkTag([
         ]) ?>
         <?= Alert::widget() ?>
 
-        <div class="category-menu">
+
         <?php
-        $categories = Categories::getCategories();
-        echo "<pre>";
-        print_r($categories);
-        echo "</pre>";
+            echo Menu::widget([
+                'encodeLabels' => false,
+                'items' => Categories::getCategories(),
+                'options' =>[
+                    'class' => 'category-menu',
+                ],
+                'activeCssClass' => 'active',
+            ]);
         ?>
-        </div>
+
 
         <?= $content ?>
     </div>

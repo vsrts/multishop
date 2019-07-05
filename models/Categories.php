@@ -18,7 +18,12 @@ class Categories extends ActiveRecord
     }
 
     public static function getCategories(){
-        return Categories::find()->asArray()->all();
+        $categories = Categories::find()->asArray()->all();
+        $categoryList = array();
+        foreach($categories as $category){
+            $categoryList[] = ['label' => $category['icon'] . "<span>" .$category['name'] . "</span>", 'url' => [$category->alias]];
+        }
+        return $categoryList;
     }
 
 }
