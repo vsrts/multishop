@@ -21,7 +21,7 @@ class Categories extends ActiveRecord
         $categories = Categories::find()->asArray()->all();
         $categoryList = array();
         foreach($categories as $category){
-            $categoryList[] = ['label' => $category['icon'] . "<span>" .$category['name'] . "</span>", 'url' => [$category->alias]];
+            $categoryList[] = ['label' => $category['icon'] . "<span>" .$category['name'] . "</span>", 'url' => [$category['alias']]];
         }
         return $categoryList;
     }

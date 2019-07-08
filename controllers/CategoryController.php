@@ -14,7 +14,7 @@ use app\models\Products;
 class CategoryController extends AppController
 {
 
-    public function actionView(){
+    public function actionView($alias){
         $id = Categories::find()->where(['alias' => $alias])->column();
         $products = Products::find()->where(['category_id' => $id])->all();
 

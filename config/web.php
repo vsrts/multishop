@@ -65,7 +65,7 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => false,
             'rules' => [
-                'category/<alias:[\w_\/-]+>' => 'category/view',
+                'category/<alias:\w+>' => 'category/view',
             ],
         ],
     ],

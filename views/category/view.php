@@ -1,3 +1,2 @@
 <?php
-echo "test";
-var_dump($products);
+print_r($products);
