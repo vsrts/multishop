@@ -67,8 +67,16 @@ $config = [
             'rules' => [
                 'admin' => 'admin/default/index',
                 'admin/<action:\w+>' => 'admin/<action>',
-                '<alias:\w+>' => 'category/view',
-                '<alias:\w+>/<itemname:\w+>' => 'products/view',
+                [
+                    'pattern' => '<alias:.+>',
+                    'route' => 'category/view',
+                    'suffix' => '.html'
+                ],
+                [
+                    'pattern' => '<alias:.+>/<itemname:\w+>',
+                    'route' => 'products/view',
+                    'suffix' => '.html'
+                ],
             ],
         ],
     ],
