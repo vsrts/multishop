@@ -65,7 +65,10 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => false,
             'rules' => [
-                'category/<alias:\w+>' => 'category/view',
+                'admin' => 'admin/default/index',
+                'admin/<action:\w+>' => 'admin/<action>',
+                '<alias:\w+>' => 'category/view',
+                '<alias:\w+>/<itemname:\w+>' => 'products/view',
             ],
         ],
     ],

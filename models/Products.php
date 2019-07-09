@@ -15,4 +15,8 @@ class Products extends ActiveRecord
     public static function tableName(){
         return 'products';
     }
+
+    public function getCategory(){
+        return $this->hasOne(Categories::className(), ['id' => 'category_id']);
+    }
 }

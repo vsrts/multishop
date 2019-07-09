@@ -24,6 +24,7 @@ use app\modules\admin\models\Option;
     <?= $form->field($productInfo, 'price')->textInput() ?>
     <?= $form->field($productInfo, 'discount')->textInput() ?>
     <?= $form->field($productInfo, 'status')->textInput() ?>
+    <?= $form->field($model, 'alias')->textInput() ?>
     <?= $form->field($model, 'optionsArray')->dropDownList(Option::find()->select(['name', 'id'])->indexBy('id')->column(), [ 'multiple' => 'multiple']) ?>
 
 

@@ -35,12 +35,12 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['sku'], 'required'],
+            [['sku', 'alias'], 'required'],
             [['sku', 'category_id', 'weight', 'kkal', 'count', 'volume'], 'integer'],
-            [['text'], 'string'],
+            [['text', 'alias'], 'string'],
             [['optionsArray'], 'safe'],
             [['name'], 'string', 'max' => 255],
-            [['sku'], 'unique'],
+            [['sku', 'alias'], 'unique'],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
     }
