@@ -13,7 +13,8 @@ use app\models\Products;
 class ProductsController extends AppController
 {
     public function actionView($alias, $itemname){
-        $product = Products::find()->where(['alias' => $itemname])->all();
+        print_r($_REQUEST);
+        $product = Products::find()->where(['alias' => $itemname])-with('productInfo')->all();
         return $this->render('view', compact('product'));
     }
 }

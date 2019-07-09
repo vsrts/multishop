@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-
+$this->params['breadcrumbs'][] = $category->name;
 ?>
 <h1><?= Html::encode($category->name) ?></h1>
 <div class="products">
