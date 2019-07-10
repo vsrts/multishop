@@ -14,6 +14,9 @@ class ProductsController extends AppController
 {
     public function actionView($alias, $itemname){
         $product = Products::find()->where(['alias' => $itemname])->with('productInfo', 'category')->one();
+
+        $this->setMeta($product->name);
+
         return $this->render('view', compact('product'));
     }
 }
