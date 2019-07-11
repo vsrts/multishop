@@ -67,6 +67,7 @@ $config = [
             'rules' => [
                 'admin' => 'admin/default/index',
                 'admin/<action:\w+>' => 'admin/<action>',
+                'cart/<action:\w+>' => 'cart/<action>',
                 '<alias:[\w_-]+>' => 'category/view',
                 '<alias:[\w_-]+>/<itemname:[\w_-]+>' => 'products/view',
             ],
