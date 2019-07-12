@@ -13,6 +13,15 @@ use yii\db\ActiveRecord;
 class Cart extends ActiveRecord
 {
     public function addToCart($product, $qty=1){
-        echo "Worked";
+        if(isset($_SESSION['cart'][$product->id])){
+            $_SESSION['cart'][$product->id]['qty'] += $qty;
+        }else{
+            $_SESSION['cart'][$product->id] = [
+                'qty' => $qty,
+                'name' => $product->name,
+                'price' => $products->productInfo->price,
+            ];
+        }
+        $_SESSION['cart.sum'] = isset($_SESSION['cart.sum']) ? $_SESSION['cart.sum'] + $qty * $product->productInfo->price : $qty * $product->productInfo->price;
     }
 }
