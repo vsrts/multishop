@@ -95,3 +95,6 @@
     margin-top: -4px;
     margin-right: 5px;
 }
+.del-item{
+    cursor: pointer;
+}

@@ -66,8 +66,9 @@ $config = [
             'enableStrictParsing' => false,
             'rules' => [
                 'admin' => 'admin/default/index',
-                'admin/<action:\w+>' => 'admin/<action>',
-                'cart/<action:\w+>' => 'cart/<action>',
+                'admin/<action:[\w_-]+>' => 'admin/<action>',
+                'site/<action:[\w_-]+>' => 'site/<action>',
+                'cart/<action:[\w_-]+>' => 'cart/<action>',
                 '<alias:[\w_-]+>' => 'category/view',
                 '<alias:[\w_-]+>/<itemname:[\w_-]+>' => 'products/view',
             ],

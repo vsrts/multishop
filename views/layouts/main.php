@@ -63,8 +63,8 @@ $this->registerLinkTag([
     ]);
     NavBar::end();
     ?>
-
     <div class="container">
+        <a id="cart-button" href="#">Корзина</a>
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
@@ -94,6 +94,17 @@ $this->registerLinkTag([
         <!--<p class="pull-right"><?= Yii::powered() ?></p>-->
     </div>
 </footer>
+
+<?php \yii\bootstrap\Modal::begin([
+    'header' => '<h2>Корзина</h2>',
+    'id' => 'cart',
+    'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
+        <button type="button" class="btn btn-success">Оформить заказ</button>
+        <button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>',
+]);
+echo "<h3>Корзина пуста</h3>";
+\yii\bootstrap\Modal::end();
+?>
 
 <?php $this->endBody() ?>
 </body>
