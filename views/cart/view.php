@@ -34,6 +34,11 @@ use yii\bootstrap\ActiveForm;
 
         </table>
     </div>
+    <?php if(Yii::$app->user->isGuest) : ?>
+        Вы гость, введите данные
+    <?php else: ?>
+        <?= Yii::$app->user->id ?>
+    <?php endif; ?>
 <?php else: ?>
     <h3>Корзина пуста</h3>
 <?php endif; ?>
