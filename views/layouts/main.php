@@ -11,6 +11,7 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\models\Categories;
 use yii\widgets\Menu;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 
@@ -99,7 +100,7 @@ $this->registerLinkTag([
     'header' => '<h2>Корзина</h2>',
     'id' => 'cart',
     'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
-        <button type="button" class="btn btn-success">Оформить заказ</button>
+        <a href="' . Url::to(['cart/view']) . '" class="btn btn-success">Оформить заказ</a>
         <button type="button" class="btn btn-danger" onclick="clearCart()">Очистить корзину</button>',
 ]);
 echo "<h3>Корзина пуста</h3>";

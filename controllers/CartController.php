@@ -10,6 +10,7 @@ namespace app\controllers;
 
 use app\models\Products;
 use app\models\Cart;
+use app\models\Order;
 use Yii;
 
 
@@ -45,5 +46,13 @@ class CartController extends AppController
         $cart->recalc($id);
         $this->layout = false;
         return $this->render('cart-modal', compact('session'));
+    }
+
+    public function actionView(){
+        $session = Yii::$app->session;
+        $session->open();
+        $this->setMeta('Корзина');
+        $order = new Order();
+        return $this->render('view', compact('session', 'order'));
     }
 }

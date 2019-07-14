@@ -20,6 +20,8 @@ class Cart extends ActiveRecord
                 'qty' => $qty,
                 'name' => $product->name,
                 'price' => $product->productInfo->price,
+                'alias' => $product->alias,
+                'category' => $product->category->alias,
             ];
         }
         $_SESSION['cart.sum'] = isset($_SESSION['cart.sum']) ? $_SESSION['cart.sum'] + $qty * $product->productInfo->price : $qty * $product->productInfo->price;
