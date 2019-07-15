@@ -35,8 +35,10 @@ class Order extends \yii\db\ActiveRecord
     {
         return [
             [['created', 'updated'], 'safe'],
-            [['qty', 'sum', 'status', 'user_id'], 'required'],
-            [['qty', 'sum', 'status', 'user_id'], 'integer'],
+            [['sum', 'user_id'], 'required'],
+            [['sum', 'status', 'user_id', 'type_delivery', 'phone', 'home', 'apart'], 'integer'],
+            [['name', 'street'], 'string', 'max'=>255],
+            [['comment'], 'string'],
             [['user_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['user_id' => 'id']],
         ];
     }
@@ -47,7 +49,14 @@ class Order extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'user_id' => 'User ID',
+            'user_id' => 'User Id',
+            'type_delivery' => 'Способ доставки',
+            'name' => 'Имя',
+            'phone' => 'Телефон',
+            'street' => 'Улица',
+            'home' => 'Дом',
+            'apart' => 'Квартира',
+            'comment' => 'Комментарий к заказу',
         ];
     }
 

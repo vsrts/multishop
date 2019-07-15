@@ -5,7 +5,6 @@ use yii\helpers\Url;
 use yii\bootstrap\ActiveForm;
 
 ?>
-
 <?php if(!empty($session['cart'])) : ?>
     <div class="table-responsive">
         <table class="table table-hover table-striped">
@@ -34,11 +33,19 @@ use yii\bootstrap\ActiveForm;
 
         </table>
     </div>
-    <?php if(Yii::$app->user->isGuest) : ?>
-        Вы гость, введите данные
-    <?php else: ?>
-        <?= Yii::$app->user->id ?>
-    <?php endif; ?>
+    <?php
+    $order->type_delivery = 0;
+    $form = ActiveForm::begin()
+    ?>
+    <?= $form->field($order, 'type_delivery')->radioList(['0' => 'Самовывоз', '1' => 'Доставка']); ?>
+    <?= $form->field($order, 'name'); ?>
+    <?= $form->field($order, 'phone'); ?>
+    <?= $form->field($order, 'street'); ?>
+    <?= $form->field($order, 'home'); ?>
+    <?= $form->field($order, 'apart'); ?>
+    <?= $form->field($order, 'comment')->textarea(); ?>
+    <?= Html::submitButton('Оформить заказ', ['class' => 'btn btn-success']) ?>
+    <?php $form = ActiveForm::end() ?>
 <?php else: ?>
     <h3>Корзина пуста</h3>
 <?php endif; ?>

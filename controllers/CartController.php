@@ -8,6 +8,7 @@
 
 namespace app\controllers;
 
+use app\models\OrderItems;
 use app\models\Products;
 use app\models\Cart;
 use app\models\Order;
@@ -53,6 +54,39 @@ class CartController extends AppController
         $session->open();
         $this->setMeta('Корзина');
         $order = new Order();
+        if($order->load(Yii::$app->request->post())){
+            $order->user_id = (Yii::$app->user->isGuest) ? 0 : Yii::$app->user->id;
+            $order->sum = $session['cart.sum'];
+            $transaction=Yii::$app->db->beginTransaction();
+            try {
+                if ($order->save()) {
+                    $this->saveOrderItems($session['cart'], $order->id);
+                    $transaction->commit();
+                    Yii::$app->session->setFlash('success', 'Ваш заказ принят');
+                    $session->remove('cart');
+                    $session->remove('cart.sum');
+                    return $this->refresh();
+                } else {
+                    Yii::$app->session->setFlash('error', 'Ошибка');
+                }
+            }catch(Exception $e){
+                $transaction->rollBack();
+                throw $e;
+            }
+        }
         return $this->render('view', compact('session', 'order'));
+    }
+
+    public function saveOrderItems($items, $order_id){
+        foreach($items as $id => $item){
+            $order_items = new OrderItems();
+            $order_items->order_id = $order_id;
+            $order_items->product_id = $id;
+            $order_items->name = $item['name'];
+            $order_items->price = $item['price'];
+            $order_items->qty_item = $item['qty'];
+            $order_items->sum_item = $item['price'] * $item['qty'];
+            $order_items->save();
+        }
     }
 }
