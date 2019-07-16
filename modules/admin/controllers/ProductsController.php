@@ -9,6 +9,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ProductsController implements the CRUD actions for Products model.
@@ -77,6 +78,7 @@ class ProductsController extends Controller
             $transaction=Yii::$app->db->beginTransaction();
             try {
                 if ($isValid) {
+                    $this->saveImage($model);
                     $model->save(false);
                 }
 
@@ -120,6 +122,7 @@ class ProductsController extends Controller
             $isValid = $model->validate();
             $isValid = $productInfo->validate() && $isValid;
             if($isValid){
+                $this->saveImage($model);
                 $model->save();
                 $productInfo->save();
                 return $this->redirect('index');
@@ -160,5 +163,25 @@ class ProductsController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function saveImage($model){
+        $model->image = UploadedFile::getInstance($model, 'image');
+        if(!empty($model->image)){
+            $model->image->saveAs('uploads/items/' . $model->image->name);
+            $model->image = 'uploads/items/' . $model->image->name;
+        }
+    }
+
+    public function actionDeleteimage($id){
+        $model = $this->findModel($id);
+        unlink(Yii::getAlias('').$model->image);
+        $model->image = null;
+        $model->update();
+        if(Yii::$app->request->isAjax){
+            return 'Изображение удалено';
+        }else{
+            return $this->redirect(['update', 'id' => $model->id]);
+        }
     }
 }

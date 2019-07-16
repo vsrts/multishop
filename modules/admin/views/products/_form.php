@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use app\modules\admin\models\Categories;
 use app\modules\admin\models\Option;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Products */
@@ -24,6 +25,11 @@ use app\modules\admin\models\Option;
     <?= $form->field($productInfo, 'price')->textInput() ?>
     <?= $form->field($productInfo, 'discount')->textInput() ?>
     <?= $form->field($productInfo, 'status')->textInput() ?>
+    <?php if(!empty($model->image)) : ?>
+        <?= Html::img('@web/' . $model->image, $options = ['class' => 'postImg', 'style' => ['width' => '180px']]);?>
+        <span class="glyphicon glyphicon-remove text-danger del-image" data-id="<?= $model->id ?>"></span>
+    <?php endif; ?>
+    <?= $form->field($model, 'image')->fileInput() ?>
     <?= $form->field($model, 'alias')->textInput() ?>
     <?= $form->field($model, 'optionsArray')->dropDownList(Option::find()->select(['name', 'id'])->indexBy('id')->column(), [ 'multiple' => 'multiple']) ?>
 

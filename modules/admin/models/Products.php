@@ -39,7 +39,8 @@ class Products extends \yii\db\ActiveRecord
             [['sku', 'category_id', 'weight', 'kkal', 'count', 'volume'], 'integer'],
             [['text', 'alias'], 'string'],
             [['optionsArray'], 'safe'],
-            [['name'], 'string', 'max' => 255],
+            [['name', 'image'], 'string', 'max' => 255],
+            [['image'], 'file'],
             [['sku', 'alias'], 'unique'],
             [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Categories::className(), 'targetAttribute' => ['category_id' => 'id']],
         ];
@@ -63,7 +64,8 @@ class Products extends \yii\db\ActiveRecord
             'price' => 'Цена',
             'discount' => 'Скидка',
             'status' => 'Статус',
-            'optionsArray' => 'Опции'
+            'optionsArray' => 'Опции',
+            'image' => 'Изображение',
         ];
     }
 

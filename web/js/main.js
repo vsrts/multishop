@@ -37,6 +37,19 @@ $('#cart .modal-body').on('click', '.del-item', function(){
     });
 });
 
+$('.del-image').on('click', function(){
+  var id = $(this).data('id');
+  $.ajax({
+    url: '/admin/products/deleteimage',
+    data: {id: id},
+    type: 'GET',
+    success: function(res){
+      $('.del-image').html(res);
+      $('.postImg').remove();
+    }
+  });
+});
+
 $('.add-to-cart').on('click', function(e){
     e.preventDefault();
     var id = $(this).data('id');
