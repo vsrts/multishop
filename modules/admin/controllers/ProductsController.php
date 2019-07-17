@@ -152,6 +152,28 @@ class ProductsController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionExport(){
+        $data = "Артикул;Название;Категория;Описание;Вес;Калории;Количество в порции;Объём;Картинка\r\n";
+        $model = Products::find()->with('category', 'productInfo')->all();
+        foreach($model as $product){
+            $data .= $product->sku .
+                ';' . $product->name .
+                ';' . $product->category->name .
+                ';' . $product->text .
+                ';' . $product->weight .
+                ';' . $product->kkal .
+                ';' . $product->count .
+                ';' . $product->volume .
+                ';' . $product->image .
+                "\r\n";
+        }
+        header('Content-type: text/csv');
+        header('Content-Disposition: attachment; filename="export_' . date('d.m.Y') . '.csv"');
+        echo "<pre>";
+        print_r($data);
+        echo "</pre>";
+    }
+
     /**
      * Finds the Products model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
