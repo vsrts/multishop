@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * StockController implements the CRUD actions for Stock model.
@@ -66,7 +67,9 @@ class StockController extends Controller
     {
         $model = new Stock();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $this->saveImage($model);
+            $model->save();
             return $this->redirect(['index', 'id' => $model->id]);
         }
 
@@ -86,7 +89,9 @@ class StockController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $this->saveImage($model);
+            $model->save();
             return $this->redirect(['index', 'id' => $model->id]);
         }
 
@@ -106,6 +111,10 @@ class StockController extends Controller
     {
         $this->findModel($id)->delete();
 
+        if($model->image) {
+            unlink(Yii::getAlias('') . $model->image);
+        }
+
         return $this->redirect(['index']);
     }
 
@@ -123,5 +132,25 @@ class StockController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function saveImage($model){
+        $model->image = UploadedFile::getInstance($model, 'image');
+        if(!empty($model->image)){
+            $model->image->saveAs('uploads/items/' . $model->image->name);
+            $model->image = 'uploads/items/' . $model->image->name;
+        }
+    }
+
+    public function actionDeleteimage($id){
+        $model = $this->findModel($id);
+        unlink(Yii::getAlias('').$model->image);
+        $model->image = null;
+        $model->update();
+        if(Yii::$app->request->isAjax){
+            return 'Изображение удалено';
+        }else{
+            return $this->redirect(['update', 'id' => $model->id]);
+        }
     }
 }

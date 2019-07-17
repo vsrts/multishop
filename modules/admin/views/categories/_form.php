@@ -16,13 +16,13 @@ use yii\widgets\ActiveForm;
 
     <?php if(!empty($model->image)) : ?>
         <?= Html::img('@web/' . $model->image, $options = ['class' => 'postImg', 'style' => ['width' => '180px']]);?>
-        <span class="glyphicon glyphicon-remove text-danger del-image" data-id="<?= $model->id ?>"></span>
+        <a class="del-image" onclick="delImage(<?= $model->id ?>, '/admin/categories/deleteimage')" ><span class="glyphicon glyphicon-remove text-danger"></span></a>
     <?php endif; ?>
     <?= $form->field($model, 'image')->fileInput() ?>
 
     <?php if(!empty($model->icon)) : ?>
         <?= Html::img('@web/' . $model->icon, $options = ['class' => 'postIcon', 'style' => ['width' => '50px']]);?>
-        <span class="glyphicon glyphicon-remove text-danger del-icon" data-id="<?= $model->id ?>"></span>
+        <a class="del-icon" onclick="delIcon(<?= $model->id ?>, '/admin/categories/deleteicon')" ><span class="glyphicon glyphicon-remove text-danger"></span></a>
     <?php endif; ?>
     <?= $form->field($model, 'icon')->fileInput() ?>
 

@@ -35,6 +35,7 @@ class Stock extends \yii\db\ActiveRecord
             [['text'], 'string'],
             [['sort'], 'integer'],
             [['image'], 'string', 'max' => 255],
+            [['image'], 'file'],
             [['citiesArray'], 'safe'],
         ];
     }

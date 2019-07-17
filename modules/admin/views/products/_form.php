@@ -27,8 +27,7 @@ use yii\helpers\Url;
     <?= $form->field($productInfo, 'status')->textInput() ?>
     <?php if(!empty($model->image)) : ?>
         <?= Html::img('@web/' . $model->image, $options = ['class' => 'postImg', 'style' => ['width' => '180px']]);?>
-        <span class="glyphicon glyphicon-remove text-danger del-image" data-id="<?= $model->id ?>"></span>
-        <a onclick="delImage(<?= $model->id ?>, '/admin/products/deleteimage')" data-id="<?= $model->id ?>">Удалить</a>
+        <a class="del-image" onclick="delImage(<?= $model->id ?>, '/admin/products/deleteimage')" ><span class="glyphicon glyphicon-remove text-danger"></span></a>
     <?php endif; ?>
     <?= $form->field($model, 'image')->fileInput() ?>
     <?= $form->field($model, 'alias')->textInput() ?>

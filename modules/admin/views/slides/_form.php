@@ -12,7 +12,11 @@ use yii\bootstrap\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'image')->textInput(['maxlength' => true]) ?>
+    <?php if(!empty($model->image)) : ?>
+        <?= Html::img('@web/' . $model->image, $options = ['class' => 'postImg', 'style' => ['width' => '180px']]);?>
+        <a class="del-image" onclick="delImage(<?= $model->id ?>, '/admin/slides/deleteimage')" ><span class="glyphicon glyphicon-remove text-danger"></span></a>
+    <?php endif; ?>
+    <?= $form->field($model, 'image')->fileInput() ?>
 
     <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
 

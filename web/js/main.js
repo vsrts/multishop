@@ -59,7 +59,7 @@ $('#cart .modal-body').on('click', '.del-item', function(){
     });
 });
 
-//Delete product image
+//Delete admin image
 function delImage(id, url){
   $.ajax({
     url: url,
@@ -72,39 +72,10 @@ function delImage(id, url){
   });
 }
 
-//Delete product image
-$('.products-form .del-image').on('click', function(){
-  var id = $(this).data('id');
+//Delete admin icon
+function delIcon(id, url){
   $.ajax({
-    url: '/admin/products/deleteimage',
-    data: {id: id},
-    type: 'GET',
-    success: function(res){
-      $('.del-image').html(res);
-      $('.postImg').remove();
-    }
-  });
-});
-
-//Delete category image
-$('.categories-form .del-image').on('click', function(){
-  var id = $(this).data('id');
-  $.ajax({
-    url: '/admin/categories/deleteimage',
-    data: {id: id},
-    type: 'GET',
-    success: function(res){
-      $('.del-image').html(res);
-      $('.postImg').remove();
-    }
-  });
-});
-
-//Delete category icon
-$('.categories-form .del-icon').on('click', function(){
-  var id = $(this).data('id');
-  $.ajax({
-    url: '/admin/categories/deleteicon',
+    url: url,
     data: {id: id},
     type: 'GET',
     success: function(res){
@@ -112,6 +83,8 @@ $('.categories-form .del-icon').on('click', function(){
       $('.postIcon').remove();
     }
   });
-});
+}
+
+
 
 

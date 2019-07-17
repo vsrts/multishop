@@ -35,6 +35,7 @@ class Slides extends \yii\db\ActiveRecord
             [['sort'], 'integer'],
             [['citiesArray'], 'safe'],
             [['image', 'code'], 'string', 'max' => 255],
+            [['image'], 'file'],
         ];
     }
 
