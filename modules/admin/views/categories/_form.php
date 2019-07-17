@@ -14,6 +14,18 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
+    <?php if(!empty($model->image)) : ?>
+        <?= Html::img('@web/' . $model->image, $options = ['class' => 'postImg', 'style' => ['width' => '180px']]);?>
+        <span class="glyphicon glyphicon-remove text-danger del-image" data-id="<?= $model->id ?>"></span>
+    <?php endif; ?>
+    <?= $form->field($model, 'image')->fileInput() ?>
+
+    <?php if(!empty($model->icon)) : ?>
+        <?= Html::img('@web/' . $model->icon, $options = ['class' => 'postIcon', 'style' => ['width' => '50px']]);?>
+        <span class="glyphicon glyphicon-remove text-danger del-icon" data-id="<?= $model->id ?>"></span>
+    <?php endif; ?>
+    <?= $form->field($model, 'icon')->fileInput() ?>
+
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
         <?= Html::a('Отмена', ['index'], ['class'=>'btn btn-primary']) ?>

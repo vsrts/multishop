@@ -27,7 +27,8 @@ class Categories extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['name'], 'string', 'max' => 255],
+            [['name', 'image', 'icon'], 'string', 'max' => 255],
+            [['image', 'icon'], 'file'],
         ];
     }
 

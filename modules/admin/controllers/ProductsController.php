@@ -144,8 +144,11 @@ class ProductsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        $model->delete();
+        if($model->image) {
+            unlink(Yii::getAlias('') . $model->image);
+        }
         return $this->redirect(['index']);
     }
 

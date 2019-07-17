@@ -8,6 +8,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * CategoriesController implements the CRUD actions for Categories model.
@@ -67,7 +68,10 @@ class CategoriesController extends Controller
     {
         $model = new Categories();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $this->saveImage($model);
+            $this->saveIcon($model);
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -87,7 +91,10 @@ class CategoriesController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $this->saveImage($model);
+            $this->saveIcon($model);
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         }
 
@@ -106,6 +113,12 @@ class CategoriesController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+        if($model->image) {
+            unlink(Yii::getAlias('') . $model->image);
+        }
+        if($model->icon) {
+            unlink(Yii::getAlias('') . $model->icon);
+        }
 
         return $this->redirect(['index']);
     }
@@ -124,5 +137,45 @@ class CategoriesController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function saveImage($model){
+        $model->image = UploadedFile::getInstance($model, 'image');
+        if(!empty($model->image)){
+            $model->image->saveAs('uploads/categories/' . $model->image->name);
+            $model->image = 'uploads/categories/' . $model->image->name;
+        }
+    }
+
+    public function saveIcon($model){
+        $model->icon = UploadedFile::getInstance($model, 'icon');
+        if(!empty($model->icon)){
+            $model->icon->saveAs('uploads/icons/' . $model->icon->name);
+            $model->icon = 'uploads/icons/' . $model->icon->name;
+        }
+    }
+
+    public function actionDeleteimage($id){
+        $model = $this->findModel($id);
+        unlink(Yii::getAlias('').$model->image);
+        $model->image = null;
+        $model->update();
+        if(Yii::$app->request->isAjax){
+            return 'Изображение удалено';
+        }else{
+            return $this->redirect(['update', 'id' => $model->id]);
+        }
+    }
+
+    public function actionDeleteicon($id){
+        $model = $this->findModel($id);
+        unlink(Yii::getAlias('').$model->icon);
+        $model->icon = null;
+        $model->update();
+        if(Yii::$app->request->isAjax){
+            return 'Изображение удалено';
+        }else{
+            return $this->redirect(['update', 'id' => $model->id]);
+        }
     }
 }
