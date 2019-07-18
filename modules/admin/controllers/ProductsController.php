@@ -5,6 +5,7 @@ namespace app\modules\admin\controllers;
 use Yii;
 use app\modules\admin\models\Products;
 use app\modules\admin\models\ProductInfo;
+use app\models\Categories;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -14,7 +15,7 @@ use yii\web\UploadedFile;
 /**
  * ProductsController implements the CRUD actions for Products model.
  */
-class ProductsController extends Controller
+class ProductsController extends AppAdminController
 {
     /**
      * {@inheritdoc}
@@ -152,26 +153,94 @@ class ProductsController extends Controller
         return $this->redirect(['index']);
     }
 
+    //Export Items
     public function actionExport(){
-        $data = "Артикул;Название;Категория;Описание;Вес;Калории;Количество в порции;Объём;Картинка\r\n";
+        $data = "Артикул;Название;Категория;Описание;Цена;Скидка;Вес;Калории;Количество в порции;Объём;Картинка;Статус\r\n";
         $model = Products::find()->with('category', 'productInfo')->all();
         foreach($model as $product){
             $data .= $product->sku .
                 ';' . $product->name .
                 ';' . $product->category->name .
                 ';' . $product->text .
+                ';' . $product->productInfo->price .
+                ';' . $product->productInfo->discount .
                 ';' . $product->weight .
                 ';' . $product->kkal .
                 ';' . $product->count .
                 ';' . $product->volume .
                 ';' . $product->image .
+                ';' . $product->productInfo->status .
                 "\r\n";
         }
         header('Content-type: text/csv');
         header('Content-Disposition: attachment; filename="export_' . date('d.m.Y') . '.csv"');
-        echo "<pre>";
-        print_r($data);
-        echo "</pre>";
+        return $data;
+    }
+
+    //Import Items
+    public function actionImport(){
+        $pathToFile = Yii::getAlias('@app/web/uploads/temp/file.csv');
+        if(!file_exists($pathToFile) || !is_readable($pathToFile) ){
+            echo "Файл отсутствует";
+        }
+        if(($handle = fopen($pathToFile, r)) !== FALSE){
+            $i=0;
+            while(($row = fgetcsv($handle, 1000, ';')) !== FALSE){
+                $category = Categories::find()->where(['name' => $row[2]])->one();
+                $i++;
+                if($i == 1){continue;}
+                $thisProduct = Products::find()->where(['sku' => $row[0]])->with('productInfo')->one();
+                if($thisProduct){
+                    $thisProduct->sku = $row[0];
+                    $thisProduct->name = $row[1];
+                    $thisProduct->category_id = $category->id;
+                    $thisProduct->text = $row[3];
+                    $thisProduct->productInfo->price = $row[4];
+                    $thisProduct->productInfo->discount = $row[5];
+                    $thisProduct->weight = $row[6];
+                    $thisProduct->kkal = $row[7];
+                    $thisProduct->count = $row[8];
+                    $thisProduct->volume = $row[9];
+                    $thisProduct->image = $row[10];
+                    $thisProduct->productInfo->status = $row[11];
+                    if($thisProduct->alias == null){
+                        $thisProduct->alias = mb_strtolower($this->translit($row[1]));
+                    }
+                        if ($thisProduct->validate() && $thisProduct->productInfo->validate()) {
+                            $thisProduct->update();
+                            $thisProduct->productInfo->update();
+                        } else {
+                            echo "Обновить не удалось";
+                        }
+                }else{
+                    $newProduct = new Products();
+                    $newProductInfo = new ProductInfo();
+                    $newProduct->sku = $row[0];
+                    $newProduct->name = $row[1];
+                    $newProduct->category_id = $category->id;
+                    $newProduct->text = $row[3];
+                    $newProduct->weight = $row[6];
+                    $newProduct->kkal = $row[7];
+                    $newProduct->count = $row[8];
+                    $newProduct->volume = $row[9];
+                    $newProduct->image = $row[10];
+                    $newProduct->alias =  mb_strtolower($this->translit($row[1]));
+                    if ($newProduct->validate()) {
+                        $newProduct->save();
+                        $newProductInfo->product_id = $newProduct->id;
+                        $newProductInfo->price = $row[4];
+                        $newProductInfo->discount = $row[5];
+                        $newProductInfo->status = $row[11];
+                        if ($newProductInfo->validate()) {
+                            $newProductInfo->save();
+                        }
+                    } else {
+                        echo "Сохранить не удалось";
+                    }
+                }
+            }
+            fclose($handle);
+        }
     }
 
     /**
