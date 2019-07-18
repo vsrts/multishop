@@ -153,6 +153,10 @@ class ProductsController extends AppAdminController
         return $this->redirect(['index']);
     }
 
+    public function actionMass(){
+        return $this->render('mass');
+    }
+
     //Export Items
     public function actionExport(){
         $data = "Артикул;Название;Категория;Описание;Цена;Скидка;Вес;Калории;Количество в порции;Объём;Картинка;Статус\r\n";
@@ -179,7 +183,9 @@ class ProductsController extends AppAdminController
 
     //Import Items
     public function actionImport(){
-        $pathToFile = Yii::getAlias('@app/web/uploads/temp/file.csv');
+        $file = UploadedFile::getInstanceByName('csvFile');
+        $file->saveAs('uploads/temp/' . $file->name);
+        $pathToFile = Yii::getAlias('@app/web/uploads/temp/' . $file->name);
         if(!file_exists($pathToFile) || !is_readable($pathToFile) ){
             echo "Файл отсутствует";
         }
@@ -241,6 +247,7 @@ class ProductsController extends AppAdminController
             }
             fclose($handle);
         }
+        return $this->redirect('mass');
     }
 
     /**
