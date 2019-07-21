@@ -85,6 +85,23 @@ function delIcon(id, url){
   });
 }
 
+//Points list in Area
+$('#select-city').change(function(){
+    var city = this.value;
+    //alert(city);
+    $.ajax({
+        url: '/admin/area/pointlist',
+        data: {id: city},
+        type: 'POST',
+        success: function (res) {
+            $("select#select-point").html(res).attr("disabled", false)
+        },
+        error: function(){
+            alert('Не удаётся отобразить список точек для выбранного города');
+        }
+    });
+});
+
 
 
 

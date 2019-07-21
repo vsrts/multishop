@@ -48,12 +48,14 @@ $this->registerLinkTag([
         'items' => [
             ['label' => 'Локация', 'items' => [
                 ['label' => 'Города', 'url' => ['/admin/cities']],
+                ['label' => 'Районы', 'url' => ['/admin/area']],
                 ['label' => 'Точки', 'url' => ['/admin/points']],
             ]],
             ['label' => 'Каталог', 'items' => [
                 ['label' => 'Категории', 'url' => ['/admin/categories']],
                 ['label' => 'Товары', 'url' => ['/admin/products']],
                 ['label' => 'Опции', 'url' => ['/admin/option']],
+                ['label' => 'Импорт/Экспорт', 'url' => ['/admin/products/mass']],
             ]],
             ['label' => 'Слайды', 'url' => ['/admin/slides']],
             ['label' => 'Акции', 'url' => ['/admin/stock']],

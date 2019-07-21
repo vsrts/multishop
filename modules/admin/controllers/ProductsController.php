@@ -246,6 +246,7 @@ class ProductsController extends AppAdminController
                 }
             }
             fclose($handle);
+            unlink(Yii::getAlias('@app/web/uploads/temp/') . $file->name);
         }
         return $this->redirect('mass');
     }
