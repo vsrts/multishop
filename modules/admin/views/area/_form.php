@@ -25,7 +25,7 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'point_id')->dropDownList(\yii\helpers\ArrayHelper::map(\app\modules\admin\models\Points::find()->all(), 'id', 'address'), ['prompt' => 'Выберите точку', 'id' => 'select-point', 'disabled' => $model->isNewRecord ? 'disabled' : false]) ?>
     <?php endif; ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList(['0' => 'Выключен', '1' => 'Включен',]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>

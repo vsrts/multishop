@@ -21,8 +21,10 @@ use Yii;
  */
 class Products extends \yii\db\ActiveRecord
 {
+    public $cityAlias;
     /**
      * {@inheritdoc}
+     *
      */
     public static function tableName()
     {
@@ -35,6 +37,7 @@ class Products extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['cityAlias'], 'safe'],
             [['sku', 'alias'], 'required'],
             [['sku', 'category_id', 'weight', 'kkal', 'count', 'volume'], 'integer'],
             [['text', 'alias'], 'string'],
@@ -66,6 +69,7 @@ class Products extends \yii\db\ActiveRecord
             'status' => 'Статус',
             'optionsArray' => 'Опции',
             'image' => 'Изображение',
+            'cityAlias' => 'Альяс города',
         ];
     }
 

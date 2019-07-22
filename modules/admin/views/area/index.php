@@ -6,7 +6,7 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Areas';
+$this->title = 'Районы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="area-index">
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Area', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить район', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?php Pjax::begin(); ?>
@@ -24,13 +24,32 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'name',
-            'city_id',
-            'point_id',
-            'status',
+            [
+                'attribute' => 'city_id',
+                'value' => function($data){
+                    return $data->city->name;
+                }
+            ],
+            [
+                'attribute' => 'point_id',
+                'value' => function($data){
+                    return $data->point->address;
+                }
+            ],
+            [
+                'attribute' => 'status',
+                'value' => function($data){
+                    return !$data->status ? '<span class="text-danger">Выключен</span>' : '<span class="text-success">Включен</span>';
+                },
+                'format' => 'html',
+            ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'headerOptions' => ['width' => '50'],
+                'template' => '{update} {delete}',
+            ],
         ],
     ]); ?>
 

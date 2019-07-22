@@ -30,7 +30,7 @@ class Cities extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'subdomain'], 'required'],
-            [['name', 'subdomain'], 'string', 'max' => 255],
+            [['name', 'subdomain', 'alias'], 'string', 'max' => 255],
         ];
     }
 
@@ -43,6 +43,7 @@ class Cities extends \yii\db\ActiveRecord
             'id' => 'ID города',
             'name' => 'Город',
             'subdomain' => 'Поддомен',
+            'alias' => 'Альяс',
         ];
     }
 

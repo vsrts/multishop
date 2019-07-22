@@ -8,6 +8,13 @@ use yii\grid\GridView;
 
 $this->title = 'Товары';
 $this->params['breadcrumbs'][] = $this->title;
+
+$session = Yii::$app->session;
+
+if($alias = $session['alias']){
+    $city = \app\modules\admin\models\Cities::find()->where(['alias' => $alias])->one();
+}
+
 ?>
 <div class="products-index">
 
@@ -16,6 +23,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Добавить товар', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+
+    <?= Html::beginForm(['products/selecttable'], 'post'); ?>
+    <?= Html::dropDownList('cityAlias', $city->id, \yii\helpers\ArrayHelper::map(\app\modules\admin\models\Cities::find()->all(), 'id', 'name'), ['prompt' => 'Общий список товаров', 'onchange'=>'this.form.submit()']) ?>
+    <?= Html::endForm(); ?>
+
 
 
     <?= GridView::widget([

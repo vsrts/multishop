@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\modules\admin\models\Cities;
 use Yii;
 use app\modules\admin\models\Products;
 use app\modules\admin\models\ProductInfo;
@@ -285,5 +286,15 @@ class ProductsController extends AppAdminController
         }else{
             return $this->redirect(['update', 'id' => $model->id]);
         }
+    }
+
+    public function actionSelecttable(){
+        $id = Yii::$app->request->post('cityAlias');
+        $model = Cities::find()->where(['id' => $id])->one();
+        $alias = $model->alias;
+        $session = Yii::$app->session;
+        $session->open();
+        $session->set('alias', $alias);
+        return $this->redirect(['index']);
     }
 }

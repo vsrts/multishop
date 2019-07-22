@@ -84,6 +84,9 @@ class CitiesController extends AppAdminController
         $model = new Cities();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if($model->alias){
+                Yii::$app->db->createCommand('CREATE TABLE IF NOT EXISTS ' . $model->alias . '_product_info LIKE product_info')->execute();
+            }
             return $this->redirect(['index', 'id' => $model->id]);
         }
 
@@ -104,6 +107,12 @@ class CitiesController extends AppAdminController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            if($model->alias){
+                $createTable = Yii::$app->db->createCommand('CREATE TABLE IF NOT EXISTS ' . $model->alias . '_product_info LIKE product_info')->execute();
+                if($createTable) {
+                    Yii::$app->db->createCommand('ALTER TABLE ' . $model->alias . '_product_info ADD CONSTRAINT fk_product_id_' . $model->alias . '_product_info FOREIGN KEY(product_id) REFERENCES products(id) ON DELETE CASCADE ON UPDATE RESTRICT')->execute();
+                }
+            }
             return $this->redirect(['index', 'id' => $model->id]);
         }
 
@@ -121,7 +130,12 @@ class CitiesController extends AppAdminController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->delete();
+
+        if($model->alias){
+            Yii::$app->db->createCommand('DROP TABLE IF EXISTS ' . $model->alias . '_product_info')->execute();
+        }
 
         return $this->redirect(['index']);
     }

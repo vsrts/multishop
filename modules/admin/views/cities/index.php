@@ -17,6 +17,7 @@ $this->title = 'Города';
         <?= Html::a('Добавить город', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -24,6 +25,7 @@ $this->title = 'Города';
 
             'name',
             'subdomain',
+            'alias',
 
             [
                 'class' => 'yii\grid\ActionColumn',

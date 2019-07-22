@@ -24,7 +24,14 @@ class ProductInfo extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return '{{%product_info}}';
+        $session = Yii::$app->session;
+        $alias = $session['alias'];
+        if($alias){
+            return $alias . '_product_info';
+        }else{
+            $session->remove('alias');
+            return 'product_info';
+        }
     }
 
     /**

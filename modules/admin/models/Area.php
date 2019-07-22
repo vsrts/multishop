@@ -47,10 +47,10 @@ class Area extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'city_id' => 'City ID',
-            'point_id' => 'Point ID',
-            'status' => 'Status',
+            'name' => 'Название района',
+            'city_id' => 'Город',
+            'point_id' => 'Адрес точки',
+            'status' => 'Статус',
         ];
     }
 

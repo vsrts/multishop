@@ -16,6 +16,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'subdomain')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
+
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
         <?= Html::a('Отмена', ['index'], ['class'=>'btn btn-primary']) ?>
