@@ -86,6 +86,7 @@ class CitiesController extends AppAdminController
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             if($model->alias){
                 Yii::$app->db->createCommand('CREATE TABLE IF NOT EXISTS ' . $model->alias . '_product_info LIKE product_info')->execute();
+                Yii::$app->db->createCommand()->addForeignKey( 'fk_product_id_' . $model->alias . '_product_info', $model->alias . '_product_info', 'product_id', 'products', 'id', 'CASCADE', 'RESTRICT')->execute();
             }
             return $this->redirect(['index', 'id' => $model->id]);
         }
@@ -107,12 +108,11 @@ class CitiesController extends AppAdminController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            if($model->alias){
-                $createTable = Yii::$app->db->createCommand('CREATE TABLE IF NOT EXISTS ' . $model->alias . '_product_info LIKE product_info')->execute();
-                if($createTable) {
-                    Yii::$app->db->createCommand('ALTER TABLE ' . $model->alias . '_product_info ADD CONSTRAINT fk_product_id_' . $model->alias . '_product_info FOREIGN KEY(product_id) REFERENCES products(id) ON DELETE CASCADE ON UPDATE RESTRICT')->execute();
-                }
-            }
+// Delete comment if you need create tables for exists cities
+//            if($model->alias){
+//                Yii::$app->db->createCommand('CREATE TABLE IF NOT EXISTS ' . $model->alias . '_product_info LIKE product_info')->execute();
+//                Yii::$app->db->createCommand()->addForeignKey( 'fk_product_id_' . $model->alias . '_product_info', $model->alias . '_product_info', 'product_id', 'products', 'id', 'CASCADE', 'RESTRICT')->execute();
+//            }
             return $this->redirect(['index', 'id' => $model->id]);
         }
 

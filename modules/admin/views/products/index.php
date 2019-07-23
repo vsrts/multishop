@@ -27,6 +27,11 @@ if($alias = $session['alias']){
     <?= Html::beginForm(['products/selecttable'], 'post'); ?>
     <?= Html::dropDownList('cityAlias', $city->id, \yii\helpers\ArrayHelper::map(\app\modules\admin\models\Cities::find()->all(), 'id', 'name'), ['prompt' => 'Общий список товаров', 'onchange'=>'this.form.submit()']) ?>
     <?= Html::endForm(); ?>
+    <?php if($alias != null) : ?>
+    <?= Html::beginForm(['products/copyinfo'], 'post'); ?>
+    <?= Html::submitButton('Импортировать данные с общего прайса', ['class' => 'btn btn-lg btn-primary']) ?>
+    <?= Html::endForm(); ?>
+    <?php endif; ?>
 
 
 

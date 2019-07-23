@@ -297,4 +297,15 @@ class ProductsController extends AppAdminController
         $session->set('alias', $alias);
         return $this->redirect(['index']);
     }
+
+    public function actionCopyinfo(){
+        $session = Yii::$app->session;
+        $alias = $session['alias'];
+        if($alias != null){
+            Yii::$app->db->createCommand('TRUNCATE TABLE ' . $alias . '_product_info')->execute();
+            Yii::$app->db->createCommand('INSERT INTO ' . $alias . '_product_info SELECT * FROM product_info')->execute();
+
+        }
+        return $this->redirect(['index']);
+    }
 }
