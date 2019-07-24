@@ -14,8 +14,9 @@ use yii\helpers\Url;
 
 class LocationWidget extends Widget
 {
+
     public function run(){
-        $host = substr(Url::base(true), strpos(Url::base(true), "." ) + 1 );
+        $host = 'multishop';
         $cities = Cities::find()->all();
         return $this->render('select-city', compact('cities', 'host'));
     }
