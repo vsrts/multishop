@@ -85,7 +85,7 @@ $this->registerLinkTag([
                 'activeCssClass' => 'active',
             ]);
         ?>
-        
+
         <?= $content ?>
     </div>
 </div>
