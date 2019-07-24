@@ -80,6 +80,7 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => false,
             'rules' => [
+                'http://<city>.multishop/<controller>/<action>' => '<controller>/<action>',
                 'admin' => 'admin/default/index',
                 'admin/<action:[\w_-]+>' => 'admin/<action>',
                 'site/<action:[\w_-]+>' => 'site/<action>',
