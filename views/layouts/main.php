@@ -108,7 +108,6 @@ $this->registerLinkTag([
 echo "<h3>Корзина пуста</h3>";
 \yii\bootstrap\Modal::end();
 ?>
-
 <?php $this->endBody() ?>
 </body>
 </html>

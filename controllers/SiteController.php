@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -12,6 +13,8 @@ use app\models\ContactForm;
 
 class SiteController extends Controller
 {
+
+
     /**
      * {@inheritdoc}
      */
@@ -130,5 +133,30 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionCheckcity($subdomain){
+        $city = Yii::$app->request->get('city');
+        $session = Yii::$app->session;
+        $session->open();
+        $session['city'] = $subdomain;
+        if($subdomain == idn_to_utf8($city)){
+            return $this->goHome();
+        }else{
+            $session->remove('cart');
+            $session->remove('cart.sum');
+            return $this->redirect(Url::to('http://' . $subdomain . '.' . DOMAIN));
+        }
+        $session->close();
+    }
+
+    public function actionCheckpoint($point){
+        $session = Yii::$app->session;
+        $session->open();
+        $session['point'] = $point;
+        $session->remove('cart');
+        $session->remove('cart.sum');
+        $session->close();
+        return $this->goHome();
     }
 }

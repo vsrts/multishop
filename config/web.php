@@ -22,6 +22,8 @@ $config = [
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
+            'enableCookieValidation' => true,
+            'enableCsrfValidation' => true,
             'cookieValidationKey' => 'kgJ7sHJ8qh7kRtXlUgS9qIv05NttsvkX',
             'baseUrl' => '',
         ],
@@ -36,6 +38,17 @@ $config = [
             'class' => 'app\components\User',
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+//            'identityCookie' => [
+//                'name' => '_identity',
+//                'httpOnly' => true,
+//                'domain' => '.' . DOMAIN,
+//            ],
+        ],
+        'session' => [
+            'cookieParams' => [
+                'path' => '/',
+                'domain' => '.' . DOMAIN,
+            ],
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',

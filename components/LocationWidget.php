@@ -9,15 +9,34 @@
 namespace app\components;
 
 use app\models\Cities;
+use app\models\Area;
 use yii\base\Widget;
-use yii\helpers\Url;
+use Yii;
 
 class LocationWidget extends Widget
 {
+    public $city;
+    public $point;
 
+    public function init(){
+        $session = Yii::$app->session;
+        $this->city = $session['city'];
+        $this->point = $session['point'];
+        print_r($this->city);
+        print_r($this->point);
+
+    }
     public function run(){
-        $host = 'multishop';
-        $cities = Cities::find()->all();
-        return $this->render('select-city', compact('cities', 'host'));
+        if($this->city == null){
+            $cities = Cities::find()->all();
+            return $this->render('select-city', compact('cities'));
+        }
+
+        if($this->city != null and $this->point == null){
+            $cityid = Cities::find()->where(['subdomain' => $this->city])->one();
+            $cityid = $cityid->id;
+            $areas = Area::find()->where(['city_id' => $cityid])->all();
+            return $this->render('select-area', compact('areas'));
+        }
     }
 }
