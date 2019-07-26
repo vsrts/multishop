@@ -10,7 +10,6 @@ namespace app\modules\admin\controllers;
 
 use yii\web\Controller;
 use yii\filters\AccessControl;
-use app\models\User;
 
 class AppAdminController extends Controller
 {

@@ -98,3 +98,9 @@
 .del-item{
     cursor: pointer;
 }
+.select-location{
+    display: none;
+}
+.show{
+    display: block;
+}

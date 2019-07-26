@@ -66,7 +66,8 @@ $this->registerLinkTag([
     ?>
     <div class="container">
 
-        <?= \app\components\LocationWidget::widget(); ?>
+        <?= \app\components\CityWidget::widget(); ?>
+        <?= \app\components\AreaWidget::widget(); ?>
 
         <a id="cart-button" href="#">Корзина</a>
 

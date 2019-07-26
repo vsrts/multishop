@@ -3,8 +3,9 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
 
+<a class="check-area"><?= $point->address; ?></a>
 
-<div class="cities-list show">
+<div class="select-location cities-list <?= $show; ?>">
     <?php
     foreach($areas as $area){
         echo Html::a($area->name, Url::to(['site/checkpoint', 'point' => $area->point_id]));
