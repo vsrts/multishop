@@ -5,8 +5,19 @@ function showCart(cart){
     $('#cart').modal();
 }
 
+//Open cart
 $('#cart-button').click(function(){
     $('#cart').modal();
+});
+
+//Select city
+$('.check-city').click(function(){
+  $('.cities-list').addClass('show');
+});
+
+//Select area
+$('.check-area').click(function(){
+  $('.areas-list').addClass('show');
 });
 
 //Add to cart

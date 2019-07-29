@@ -21,7 +21,7 @@ class AppController extends Controller
         $subdomain = $session['city'];
         $session->close();
         if($subdomain !=null and $subdomain != idn_to_utf8($city)){
-            return $this->redirect(Url::to('http://' . $subdomain . '.' . DOMAIN));
+           // return $this->redirect(Url::to('http://' . $subdomain . '.' . DOMAIN));
         }
     }
 

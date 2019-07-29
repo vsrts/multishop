@@ -135,7 +135,7 @@ class SiteController extends AppController
     }
 
     public function actionCheckcity($subdomain){
-        $city = Yii::$app->request->get('city');
+        $city = Yii::$app->request->get('city'); //Пустая после нажатия на выбранный город
         $session = Yii::$app->session;
         $session->open();
         $session['city'] = $subdomain;
@@ -145,6 +145,7 @@ class SiteController extends AppController
         }else{
             $session->remove('cart');
             $session->remove('cart.sum');
+            $session->remove('point');
             $session->close();
             return $this->redirect(Url::to('http://' . $subdomain . '.' . DOMAIN));
         }

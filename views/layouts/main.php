@@ -79,7 +79,7 @@ $this->registerLinkTag([
         <?php
             echo Menu::widget([
                 'encodeLabels' => false,
-                'items' => Categories::getCategories(),
+                'items' => Categories::getCategorieslist(),
                 'options' =>[
                     'class' => 'category-menu',
                 ],

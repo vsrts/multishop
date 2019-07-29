@@ -9,6 +9,7 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
+use Yii;
 
 
 class Categories extends ActiveRecord
@@ -17,8 +18,17 @@ class Categories extends ActiveRecord
         return 'categories';
     }
 
-    public static function getCategories(){
-        $categories = Categories::find()->asArray()->all();
+    public static function getCategorieslist(){
+        $session = Yii::$app->session;
+        $session->open();
+        $pointId = $session['point'];
+        $session->close();
+        $categories = Categories::find()
+            ->select('categories.*')
+            ->leftJoin('point_categories', 'point_categories.category_id=categories.id')
+            ->where(['point_categories.point_id' => $pointId])
+            ->asArray()
+            ->all();
         $categoryList = array();
         foreach($categories as $category){
             $categoryList[] = ['label' => $category['icon'] . "<span>" .$category['name'] . "</span>", 'url' => ['/' . $category['alias']]];

@@ -17,7 +17,7 @@ class Products extends ActiveRecord
     }
 
     public function getProductInfo(){
-        return $this->hasOne(ProductInfo::className(), ['product_id' => 'id']);
+        return $this->hasOne(ProductInfo::className(), ['product_id' => 'id'])->where(['status' => 1]);
     }
     public function getCategory(){
         return $this->hasOne(Categories::className(), ['id' => 'category_id']);
