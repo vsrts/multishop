@@ -3,7 +3,8 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
 
-<a class="check-area"><?= $point->address; ?></a>
+<div class="check-area"><?= $point->address; ?></div>
+<div class="header-phone"><?= $point->phone ?></div>
 
 <div class="select-location areas-list <?= $show; ?>">
     <?php

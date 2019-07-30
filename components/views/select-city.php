@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 ?>
 
-<a class="check-city"><?= $city->name ?></a>
+<div class="check-city"><?= $city->name ?></div>
 
 <div class="select-location cities-list <?= $show; ?>">
 <?php

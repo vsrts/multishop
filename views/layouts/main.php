@@ -38,26 +38,45 @@ $this->registerLinkTag([
 <?php $this->beginBody() ?>
 
     <header class="header">
-        <?= \app\components\CityWidget::widget(); ?>
-        <?= \app\components\AreaWidget::widget(); ?>
-        <a id="cart-button" href="#">Корзина</a>
-        <?php echo Nav::widget([
-            'options' => ['class' => 'navbar-nav'],
-            'items' => [
-                Yii::$app->user->isGuest ? (
-                ['label' => 'Войти', 'url' => ['/admin']]
-                ) : (
-                    '<li>'
-                    . Html::beginForm(['/site/logout'], 'post')
-                    . Html::submitButton(
-                        'Выйти (' . Yii::$app->user->identity->username . ')',
-                        ['class' => 'btn btn-link logout']
-                    )
-                    . Html::endForm()
-                    . '</li>'
-                )
-            ],
-        ]);  ?>
+        <div class="header-content">
+            <div class="left-info">
+                <a class="logo" href="<?= Url::home(); ?>"><img src="/images/logo.png" alt="Суши Даром"></a>
+                <?= \app\components\CityWidget::widget(); ?>
+                <?= \app\components\AreaWidget::widget(); ?>
+            </div>
+            <?php echo Menu::widget([
+                'items' => [
+                    ['label' => 'Акции', 'url' => ['site/stock']],
+                    ['label' => 'Доставка и оплата', 'url' => ['site/delivery']],
+                    ['label' => 'Вакансии', 'url' => ['site/vacansy']],
+                    ['label' => 'Контакты', 'url' => ['site/contacts']],
+                ],
+                'options' =>[
+                    'class' => 'main-menu',
+                ],
+                'activeCssClass' => 'active',
+            ]); ?>
+            <div class="right-info">
+                <a class="cart-button" id="cart-button" href="#"><img src="/images/cart.png" alt="Корзина"></a>
+                <?php echo Nav::widget([
+                    'options' => ['class' => 'user-menu'],
+                    'items' => [
+                        Yii::$app->user->isGuest ? (
+                        ['label' => 'Войти', 'url' => ['/admin']]
+                        ) : (
+                            '<li>'
+                            . Html::beginForm(['/site/logout'], 'post')
+                            . Html::submitButton(
+                                'Выйти (' . Yii::$app->user->identity->username . ')',
+                                ['class' => 'btn btn-link logout']
+                            )
+                            . Html::endForm()
+                            . '</li>'
+                        )
+                    ],
+                ]);  ?>
+            </div>
+        </div>
     </header>
 
     <div class="body">

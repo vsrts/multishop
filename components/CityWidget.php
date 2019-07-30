@@ -21,9 +21,6 @@ class CityWidget extends Widget
         $session->open();
         $this->city = $session['city'];
         $session->close();
-        print_r($this->city);
-
-
     }
     public function run(){
         if($this->city == null){

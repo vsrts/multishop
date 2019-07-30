@@ -113,3 +113,13 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+.del-item{
+    cursor: pointer;
+}
+.select-location{
+    display: none;
+}
+.show{
+    display: block;
+}

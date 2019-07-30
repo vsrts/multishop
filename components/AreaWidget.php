@@ -25,7 +25,6 @@ class AreaWidget extends Widget
         $this->city = $session['city'];
         $this->point = $session['point'];
         $session->close();
-        print_r($this->point);
     }
 
     public function run(){
