@@ -31,7 +31,7 @@ class Categories extends ActiveRecord
             ->all();
         $categoryList = array();
         foreach($categories as $category){
-            $categoryList[] = ['label' => $category['icon'] . "<span>" .$category['name'] . "</span>", 'url' => ['/' . $category['alias']]];
+            $categoryList[] = ['label' => '<img src="/' . $category['icon'] . '">' . "<span>" .$category['name'] . "</span>", 'url' => ['/' . $category['alias']]];
         }
         return $categoryList;
     }

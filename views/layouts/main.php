@@ -80,25 +80,21 @@ $this->registerLinkTag([
     </header>
 
     <div class="body">
-        <div class="left-menu">
-            <?php echo Menu::widget([
-                'encodeLabels' => false,
-                'items' => Categories::getCategorieslist(),
-                'options' =>[
-                    'class' => 'category-menu',
-                ],
-                'activeCssClass' => 'active',
-            ]); ?>
-        </div>
-        <div class="container">
-            <?= Breadcrumbs::widget([
-                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-            ]) ?>
-            <?= Alert::widget() ?>
-            <main class="main">
-                <?= $content ?>
-            </main>
-        </div>
+        <?php echo Menu::widget([
+            'encodeLabels' => false,
+            'items' => Categories::getCategorieslist(),
+            'options' =>[
+                'class' => 'left-menu',
+            ],
+            'activeCssClass' => 'active',
+        ]); ?>
+        <?= Breadcrumbs::widget([
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        ]) ?>
+        <?= Alert::widget() ?>
+        <main class="main">
+            <?= $content ?>
+        </main>
     </div>
 
     <footer class="footer">

@@ -12,12 +12,12 @@ $('#cart-button').click(function(){
 
 //Select city
 $('.check-city').click(function(){
-  $('.cities-list').addClass('show');
+  $('.cities-select').addClass('show');
 });
 
 //Select area
 $('.check-area').click(function(){
-  $('.areas-list').addClass('show');
+  $('.areas-select').addClass('show');
 });
 
 //Add to cart

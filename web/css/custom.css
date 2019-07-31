@@ -33,6 +33,46 @@
     opacity: 0.7;
     transition: all ease 0.3;
 }
+.select-location {
+    position: fixed;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: 9;
+}
+.select-content {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: center;
+}
+.select-block {
+    max-width: 800px;
+    background: #fff;
+    padding: 20px 40px 40px;
+    border: 4px solid #ffc280;
+}
+.select-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+}
+.select-list a{
+    color: #333;
+    width: 21%;
+    padding: 5px;
+    margin: 5px 2%;
+    line-height: 100%;
+    font-size: 16px;
+    border-bottom: 1px dashed #ffc280;
+}
+.select-list a:hover{
+    text-decoration: none;
+    background: #f3f3f3;
+    transition: all ease 0.3;
+}
 .header-phone {
     margin: 0 0 0 40px;
     font-size: 20px;
@@ -71,4 +111,65 @@
     text-transform: uppercase;
 }
 /* end header */
+/* left menu */
+.left-menu {
+    list-style: none;
+    padding: 20px 0;
+    margin: 0;
+    position: fixed;
+    height: 100%;
+    border-right: 1px solid #ebebeb;
+    left: 0;
+    top: 71px;
+    z-index: 9;
+    background: #fff;
+}
+.left-menu li{
+    position: relative;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+.left-menu img{
+    height: 40px;
+}
+.left-menu span{
+    position: absolute;
+    top: 0;
+    left: 80px;
+    background: #ff8400;
+    color: #fff;
+    padding: 8px 10px;
+    width: 190px;
+    text-transform: uppercase;
+    margin-top: 2px;
+    display: none;
+    opacity: 0;
+    transition: all ease 0.5s;
+}
+.left-menu li:hover span{
+    display: block;
+    opacity: 1;
+    transition: all ease 0.5s;
+}
+.left-menu span:hover{
+    opacity: 0.7;
+    transition: all ease 0.3s;
+}
+.left-menu span:before{
+    content: "";
+    position: absolute;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid #ff8400;
+
+}
+/* end left menu */
+/* slider */
+.slider {
+    padding-left: 81px;
+}
+/* end slider */
 
