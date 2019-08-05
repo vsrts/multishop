@@ -137,8 +137,8 @@ class SlidesController extends Controller
     public function saveImage($model){
         $model->image = UploadedFile::getInstance($model, 'image');
         if(!empty($model->image)){
-            $model->image->saveAs('uploads/items/' . $model->image->name);
-            $model->image = 'uploads/items/' . $model->image->name;
+            $model->image->saveAs('uploads/slides/' . $model->image->name);
+            $model->image = 'uploads/slides/' . $model->image->name;
         }
     }
 

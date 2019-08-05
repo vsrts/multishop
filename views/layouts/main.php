@@ -88,20 +88,63 @@ $this->registerLinkTag([
             ],
             'activeCssClass' => 'active',
         ]); ?>
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <main class="main">
-            <?= $content ?>
-        </main>
+        <div class="page-content">
+            <?= Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            ]) ?>
+            <?= Alert::widget() ?>
+            <main class="main">
+                <?= $content ?>
+            </main>
+        </div>
     </div>
 
     <footer class="footer">
         <div class="container">
-            <p class="pull-left">&copy; Суши Даром <?= date('Y') ?></p>
+            <div class="custom">
 
-            <!--<p class="pull-right"><?= Yii::powered() ?></p>-->
+                <div class="foot1 on-foot">
+                    <h3>
+                        Навигация
+                    </h3>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/aktsii.html">Акции</a></li>
+                        <li><a href="/dostavka-i-oplata.html">Доставка и оплата</a></li>
+                        <li><a href="/kontakty.html">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="foot2 on-foot">
+                    <h3>
+                        График работы
+                    </h3>
+                    <span id="fclock">Ежедневно с 10 : 00 - 24 : 00</span>
+                    <h3 class="f-adr">
+                        Адрес
+                    </h3>
+                    Саратов,
+                    ул. Московская 42
+                </div>
+                <div class="foot3 on-foot">
+                    <h3>
+                        Контакты
+                    </h3>
+                    <span>
+                          8 (8452) 930-080
+      <br></span>
+                    saratov@суши-даром.рф
+                    <div class="clearfix"></div>
+                    <a class="mob-icons" href="https://play.google.com/store/apps/details?id=ru.FoodSoul.NovorossiyskSushiDarom" target="_blank">
+                        <img src="https://static.foodsoul.pro/images/android_1.svg">
+                    </a>
+
+                    <a class="mob-icons" href="https://itunes.apple.com/us/app/суши-даром-новороссийск/id1222282907?mt=8&amp;uo=4" target="_blank">
+                        <img src="https://static.foodsoul.pro/images/ios_1.svg">
+                    </a>
+                </div>
+
+<!--            <p class="pull-left">&copy; Суши Даром --><?//= date('Y') ?><!--</p>-->
+<!--<p class="pull-right">--><?//= Yii::powered() ?><!--</p>-->
         </div>
     </footer>
 

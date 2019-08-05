@@ -169,7 +169,151 @@
 /* end left menu */
 /* slider */
 .slider {
-    padding-left: 81px;
+    margin: 0 -30px;
 }
 /* end slider */
-
+/* page */
+.page-content {
+    padding-left: 80px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.main {
+    padding: 0 30px;
+}
+.h2-head {
+    text-align: center;
+    font-size: 36px;
+}
+.h2-head span{
+    border-bottom: 4px solid #ff8400;
+}
+.body {
+    min-height: 100%;
+    padding-bottom: 162px;
+    box-sizing: border-box;
+    padding-top: 71px;
+    margin-top: -71px;
+}
+/* end page */
+/* teaser products */
+.products {
+    display: flex;
+    flex-wrap: wrap;
+}
+.teaser-item {
+    width: 18%;
+    margin: 1%;
+}
+.teaser-img {
+    width: 100%;
+}
+.teaser-title {
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 20px;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+}
+.buy-block{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+.old-price{
+    text-decoration: line-through;
+}
+.add-to-cart {
+    background: #ff8400;
+    color: #fff;
+    padding: 5px 20px;
+}
+/* end teaser products */
+/* full products */
+.full-item {
+    display: flex;
+}
+.full-img{
+    margin-right: 20px;
+}
+.full-name {
+    font-size: 36px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+.full-params{
+    display: flex;
+}
+.full-params div{
+    margin-right: 10px;
+}
+/* end full products */
+/* latest items */
+.latest {
+    margin: 80px 0;
+}
+.latest-items{
+    width: 14%;
+}
+/* end latest items */
+/* footer */
+.custom{
+    display: flex;
+    justify-content: space-between;
+}
+.footer-inner hr{
+    margin-bottom: 0;
+    border-top: 1px solid #353535;
+    border-bottom: 1px solid #635e5e;
+}
+.foot1, .foot2, .foot3, .foot4{
+    display: inline-block;
+    vertical-align: top;
+    /*padding-right: 62px;*/
+    color: #333;
+}
+.foot4{
+    padding-right: 0;
+    margin-bottom: -17px;
+}
+.on-foot h3{
+    font-weight: 300;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 3px;
+    color: ##333;
+    font-size: 16px;
+}
+.f-adr{
+    margin-top: 10px;
+}
+.on-foot a{
+    text-decoration: none;
+    color: #333;
+    border-bottom: 1px dashed;
+}
+.on-foot a:hover{
+    color: #777676;
+    transition: all ease 0.2s;
+}
+.foot3 span{
+    font-size: 14px;
+}
+.mob-icons{
+    display: inline-block;
+    border: none !important;
+    margin-top: 10px;
+}
+.mob-icons img{
+    height: 32px;
+}
+.mob-icons img:hover{
+    opacity: 0.7;
+    transition: all ease 0.2s;
+}
+.footer{
+    height: auto;
+    padding: 10px 0 20px;
+    margin-top: -162px;
+}
+/* end footer */
